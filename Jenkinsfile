@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        IMAGE_NAME = 'abdieeuh/simple-app'
+        IMAGE_NAME = 'reydava/simple-app' 
         REGISTRY = 'https://index.docker.io/v1/'
         REGISTRY_CREDENTIALS = 'dockerhub-credentials'
         PATH = "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
@@ -43,7 +43,7 @@ pipeline {
     }
     post {
         always {
-            echo 'Selesai build 🏁OYYY'
+            echo 'Selesai build 🏁'
         }
     }
 }
