@@ -4,8 +4,8 @@ pipeline {
         IMAGE_NAME = 'reydava/simple-app' 
         REGISTRY = 'https://index.docker.io/v1/'
         REGISTRY_CREDENTIALS = 'dockerhub-credentials'
-        // Menentukan path absolut Docker agar terbaca di Windows Service Jenkins
-        DOCKER_BIN = '"C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe"'
+        // Path absolut sesuai hasil "where docker" di komputer Anda
+        DOCKER_BIN = '"C:\\Users\\HP\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe"'
     }
     stages {
         stage('Checkout') {
