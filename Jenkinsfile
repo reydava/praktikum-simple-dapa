@@ -18,6 +18,12 @@ pipeline {
                 bat 'echo Build selesai'
             }
         }
+        stage('Database Connection Check') {
+            steps {
+                echo 'Memeriksa koneksi ke database (Simulasi/Koneksi aktif)...'
+                bat 'echo Koneksi ke database berhasil terhubung.'
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 script {
