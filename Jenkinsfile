@@ -39,13 +39,11 @@ pipeline {
                 script {
                     echo 'Push image ke Docker Hub...'
                     withCredentials([usernamePassword(credentialsId: "${REGISTRY_CREDENTIALS}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                        // Menggunakan PowerShell untuk login agar pengkodean teks (UTF-8) aman dari error Windows bat
                         powershell '''
                             $password = $env:DOCKER_PASS | ConvertTo-SecureString -AsPlainText -Force
                             $creds = New-Object System.Management.Automation.PSCredential($env:DOCKER_USER, $password)
                             & C:\\Users\\HP\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe login -u $creds.UserName -p $env:DOCKER_PASS
                         '''
-                        
                         bat "${DOCKER_BIN} push ${IMAGE_NAME}:${env.BUILD_NUMBER}"
                         bat "${DOCKER_BIN} push ${IMAGE_NAME}:latest"
                     }
