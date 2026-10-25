@@ -28,7 +28,6 @@ pipeline {
             steps {
                 script {
                     echo 'Membangun Docker image...'
-                    // Menggunakan PowerShell agar aman di Windows
                     powershell """
                         & "${env.DOCKER_BIN}" build -t ${IMAGE_NAME}:${env.BUILD_NUMBER} .
                         & "${env.DOCKER_BIN}" tag ${IMAGE_NAME}:${env.BUILD_NUMBER} ${IMAGE_NAME}:latest
@@ -43,7 +42,7 @@ pipeline {
                     echo 'Push image ke Docker Hub...'
                     withCredentials([usernamePassword(credentialsId: "${REGISTRY_CREDENTIALS}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                         powershell """
-                            $password = \$env:DOCKER_PASS | ConvertTo-SecureString -AsPlainText -Force
+                            \$password = \$env:DOCKER_PASS | ConvertTo-SecureString -AsPlainText -Force
                             \$creds = New-Object System.Management.Automation.PSCredential(\$env:DOCKER_USER, \$password)
                             & "${env.DOCKER_BIN}" login -u \$creds.UserName -p \$env:DOCKER_PASS
                             
